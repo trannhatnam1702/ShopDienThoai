@@ -59,6 +59,7 @@ dependencies {
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation ("it.xabaras.android:recyclerview-swipedecorator:1.4")
     implementation ("com.braintreepayments.api:drop-in:6.14.0")
+    implementation ("org.rajawali3d:rajawali:1.2.1970")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

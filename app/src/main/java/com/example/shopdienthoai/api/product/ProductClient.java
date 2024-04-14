@@ -20,7 +20,7 @@ public class ProductClient {
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new TokenInterceptor(token)).build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://picked-primate-poorly.ngrok-free.app/")
+                .baseUrl("https://phoneshop-production.up.railway.app/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

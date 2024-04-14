@@ -1,10 +1,17 @@
 package com.example.shopdienthoai.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +25,7 @@ import com.example.shopdienthoai.dao.CartDAO;
 import com.example.shopdienthoai.model.Cart;
 import com.example.shopdienthoai.model.Product;
 import com.squareup.picasso.Picasso;
+import android.view.Window;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +35,8 @@ public class DetailActivity extends AppCompatActivity {
 
     TextView txtName, txtPrice, txtDescription;
     ImageView productImage, btnBack;
-    Button btnBuy;
+    Button btnBuy, btn360;
+    WebView webView;
     int id;
 
     @Override
@@ -93,21 +102,74 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
+    public String productId;
+
     private void displayProductDetails(ProductData.DetailProductResponse productResponse) {
         txtName = findViewById(R.id.txtName);
         txtDescription = findViewById(R.id.txtDescription);
         txtPrice = findViewById(R.id.txtPrice);
         productImage = findViewById(R.id.productImage);
+        btn360 = findViewById(R.id.btn360);
 
         if (productResponse != null && productResponse.getProducts() != null) {
             Product product = productResponse.getProducts();
             txtName.setText(product.getName());
             txtDescription.setText(product.getDescription());
             txtPrice.setText("$"+product.getPrice().toString());
-            String imageURL = "https://picked-primate-poorly.ngrok-free.app/api/v1/product/image-product/" + product.getId();
+            productId = product.getId();
+            String imageURL = "https://phoneshop-production.up.railway.app/api/v1/product/image-product/" + product.getId();
                 Picasso picasso = Picasso.get();
                 picasso.load(imageURL).into(productImage);
         }
+
+        btn360.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri uri = Uri.parse("https://nationally-upward-kingfish.ngrok-free.app/product/model3d/" + productId);
+
+                // Đặt package của Chrome là mục tiêu để mở URL
+                intent.setPackage("com.android.chrome");
+
+                // Đặt đường dẫn của trang web là dữ liệu của Intent
+                intent.setData(uri);
+
+                // Kiểm tra xem có trình duyệt Chrome được cài đặt trên thiết bị hay không
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    // Mở trình duyệt Chrome để hiển thị URL
+                    startActivity(intent);
+                } else {
+                    // Nếu không tìm thấy trình duyệt Chrome, mở URL trong trình duyệt mặc định của thiết bị
+                    intent.setPackage(null);
+                    startActivity(intent);
+                }
+//                final Dialog dialog = new Dialog(DetailActivity.this);
+//                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                dialog.setContentView(R.layout.popup_layout);
+//                System.out.println("id product 2 "+productId);
+//
+//                webView = dialog.findViewById(R.id.web_view);
+//                webView.getSettings().setJavaScriptEnabled(true);
+//                webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+//
+////                webView.loadUrl("https://nationally-upward-kingfish.ngrok-free.app/product/model3d/" + productId);
+//
+//
+//                String url = "file:///android_res/raw/index.html?productId=" + productId;
+//                webView.loadUrl(url);
+//                webView.setWebViewClient(new WebViewClient() {
+//                    @Override
+//                    public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+//                        super.onReceivedError(view, errorCode, description, failingUrl);
+//                        // Xử lý lỗi ở đây
+//                        Log.e("WebView Error", "Error code: " + errorCode + ", Description: " + description);
+//                    }
+//                });
+//                System.out.println(webView);
+//                dialog.show();
+            }
+        });
+
     }
 
     private void turnBack(){

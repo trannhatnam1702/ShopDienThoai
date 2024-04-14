@@ -39,7 +39,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public void onBindViewHolder(CategoryViewHolder holder, int position) {
         Category category = this.categoryList.get(position);
         holder.txtName.setText(category.getName());
-        String imageURL = "https://picked-primate-poorly.ngrok-free.app/api/v1/category/image-category/" + category.getId();
+        String imageURL = "https://phoneshop-production.up.railway.app/api/v1/category/image-category/" + category.getId();
         if (holder.imgCate != null) {
             Picasso picasso = Picasso.get();
             picasso.load(imageURL).into(holder.imgCate);

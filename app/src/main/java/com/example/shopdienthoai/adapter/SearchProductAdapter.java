@@ -43,7 +43,7 @@ public class SearchProductAdapter extends RecyclerView.Adapter<SearchProductAdap
         Product product = this.productList.get(position);
         holder.txtName.setText(product.getName());
         holder.txtPrice.setText("$"+product.getPrice().toString());
-        String imageURL = "https://picked-primate-poorly.ngrok-free.app/api/v1/product/image-product/" + product.getId();
+        String imageURL = "https://phoneshop-production.up.railway.app/api/v1/product/image-product/" + product.getId();
         if (holder.productImage != null) {
             Picasso picasso = Picasso.get();
             picasso.load(imageURL).into(holder.productImage);

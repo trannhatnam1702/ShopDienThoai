@@ -66,7 +66,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                 txtName.setText(product.getName());
                 txtDescription.setText(product.getDescription());
                 txtStatus.setText(order.getStatus());
-                String imageURL = "https://picked-primate-poorly.ngrok-free.app/api/v1/product/image-product/" + product.getId();
+                String imageURL = "https://phoneshop-production.up.railway.app/api/v1/product/image-product/" + product.getId();
                 if (productImage != null) {
                     Picasso picasso = Picasso.get();
                     picasso.load(imageURL).into(productImage);

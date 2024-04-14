@@ -56,7 +56,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.txtProductPrice.setText("$"+cart.getPrice());
         holder.txtSumProductPrice.setText(String.valueOf("$"+quantity * (cart.getPrice())));
         holder.txtQuantity.setText(String.valueOf(quantity));
-        String imageURL = "https://picked-primate-poorly.ngrok-free.app/api/v1/product/image-product/" + cart.getProductId();
+        String imageURL = "https://phoneshop-production.up.railway.app/api/v1/product/image-product/" + cart.getProductId();
         if (holder.productImage != null) {
             Picasso picasso = Picasso.get();
             picasso.load(imageURL).into(holder.productImage);

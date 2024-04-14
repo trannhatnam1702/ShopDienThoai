@@ -13,7 +13,7 @@ public class CategoryClient {
         OkHttpClient client = new OkHttpClient.Builder().build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://picked-primate-poorly.ngrok-free.app/")
+                .baseUrl("https://phoneshop-production.up.railway.app/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
